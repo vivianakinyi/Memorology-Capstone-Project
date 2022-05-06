@@ -13,7 +13,6 @@ ADXL335 Accelerometer Library by Frankie Chu for seeed studio (last revised in 2
 int led = 9;           // the PWM pin the LED is attached to
 int brightness = 0;    // how bright the LED is
 int fadeAmount = 51;    // how many points to fade the LED by
-//#define PIN 6
 
 ADXL335 accelerometer;
 
@@ -22,16 +21,6 @@ ADXL335 accelerometer;
 // it to register as shaken.  A value of 1 is about right.
 float sensitivity = 1.3;
 
-// int x = 0;
-// int y = 0;
-// int z = 0;
-// int oldx = 0;
-// int oldy = 0;
-// int oldz = 0;
-// int dx = 0;
-// int dy = 0;
-// int dz = 0;
- 
 void setup()
 {
   Serial.begin(9600);
@@ -58,10 +47,6 @@ void loop()
 }
 
 boolean shake() {
-  // accelerometer.getXYZ(&x, &y, &z);
-  // x = accelerometer.accelData.x;
-  // y = accelerometer.accelData.y;
-  // z = accelerometer.accelData.z;
    float ax, ay, az;
    accelerometer.getAcceleration(&ax, &ay, &az);
    Serial.println("accleration of X/Y/Z: ");
@@ -72,24 +57,8 @@ boolean shake() {
    Serial.print(az);
    Serial.println(" g");
    delay(500);
- //  dx = x - oldx;
- //  dy = y - oldy;
- //  dz = z - oldz;
- //  oldx = x;
- //  oldy = y;
- //  oldz = z;
   
-  /*
-  Uncomment the lines below for debugging the accelerometer.
-  They print the change in accelerometer readings to the
-  serial connection so you can see them on the computer.
-  */
-  
-  // Serial.println(dx);  
-  // Serial.println(dy);
- //  Serial.println(dz);
-  
- // accelerometer.read();
+
     if((abs(ax) > sensitivity) && (abs(ay) > sensitivity) && (abs(az) > sensitivity)) {
     Serial.println("shaken!");
     return true;
